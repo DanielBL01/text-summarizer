@@ -39,7 +39,7 @@ def score(sentences, freq_table):
 
     :return: a dictionary 
     '''
-    sentence_value = {}
+    sentence_value = {} 
     
     for sentence in sentences:
         total_words_in_sentence = (len(word_tokenize(sentence)))
@@ -51,7 +51,7 @@ def score(sentences, freq_table):
                 else:
                     sentence_value[sentence[:10]] = freq_table[word_value]
 
-        sentence_value[sentence[:10]] = sentence_value[sentence[:10]]
+        sentence_value[sentence[:10]] = sentence_value[sentence[:10]] // total_words_in_sentence
 
     return sentence_value
 
@@ -81,7 +81,7 @@ def generate_final_summary(sentences, sentence_scores, threshold):
 
     return final_summary
 
-def call_summary(text):
+def call_summary(text, weight):
     '''
     Called by the Flask application
 
@@ -91,6 +91,6 @@ def call_summary(text):
     sentences = generate_sentences(text)
     sentence_scores = score(sentences, freq_table)
     threshold = generate_threshold(sentence_scores)
-    summary = generate_final_summary(sentences, sentence_scores, 1.5 * threshold)
+    summary = generate_final_summary(sentences, sentence_scores, weight * threshold)
     
     return summary
