@@ -81,14 +81,16 @@ def generate_final_summary(sentences, sentence_scores, threshold):
 
     return final_summary
 
-freq_table = generate_freq_table(text)
+def call_summary(text):
+    '''
+    Called by the Flask application
 
-sentences = generate_sentences(text)
-
-sentence_scores = score(sentences, freq_table)
-
-threshold = generate_threshold(sentence_scores)
-
-summary = generate_final_summary(sentences, sentence_scores, 1.5 * threshold)
-
-print(summary)
+    :return: the string which represents the final summary
+    '''
+    freq_table = generate_freq_table(text)
+    sentences = generate_sentences(text)
+    sentence_scores = score(sentences, freq_table)
+    threshold = generate_threshold(sentence_scores)
+    summary = generate_final_summary(sentences, sentence_scores, 1.5 * threshold)
+    
+    return summary
