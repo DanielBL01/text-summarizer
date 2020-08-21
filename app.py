@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from textSummarizer import generateSummary, generateWeight
+from extractiveTextSummarizer import generateSummary, generateWeight
 import wikipedia
 
 app = Flask(__name__)
