@@ -1,5 +1,6 @@
+from pymongo import MongoClient
 from flask import Flask, request, render_template
-from extractiveTextSummarizer import generateSummary, generateWeight
+from extractiveTextSummarizer import generateWeight, simpleMaths, tfidf
 import wikipedia
 
 app = Flask(__name__)
@@ -15,9 +16,12 @@ def index():
             weight = request.form['level']
             calculated_weight = generateWeight.weight_range(weight)
 
-            final_summary = generateSummary.call_summary(text, calculated_weight)
+            simple_summary = simpleMaths.call_summary(text, calculated_weight)
+            tf_idf_summary = tfidf.call_Summary(text, calculated_weight)
 
-            return render_template('index.html', final_summary=final_summary)
+            note = 'Your summary has finished processing. Please choose either the Simple Maths or TF IDF summarization algorithm'
+
+            return render_template('index.html', simple=simple_summary, tf_idf=tf_idf_summary, note=note)
 
         except wikipedia.WikipediaException as e:
             return render_template('error.html', error=e)

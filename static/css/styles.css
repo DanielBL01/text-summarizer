@@ -4,3 +4,7 @@
     font-family: 'Quicksand', sans-serif;
     font-size: medium;
 }
+
+.pagecontent.simple{
+    display: none;
+}
