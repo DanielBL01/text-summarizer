@@ -19,9 +19,7 @@ def index():
             simple_summary = simpleMaths.call_summary(text, calculated_weight)
             tf_idf_summary = tfidf.call_Summary(text, calculated_weight)
 
-            note = 'Your summary has finished processing. Please choose either the Simple Maths or TF IDF summarization algorithm'
-
-            return render_template('index.html', simple=simple_summary, tf_idf=tf_idf_summary, note=note)
+            return render_template('index.html', simple=simple_summary, tf_idf=tf_idf_summary)
 
         except wikipedia.WikipediaException as e:
             return render_template('error.html', error=e)
